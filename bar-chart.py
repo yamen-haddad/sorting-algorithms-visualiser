@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 from matplotlib.animation import FuncAnimation
+import time
 
 def bubbleSort(n,a):
     for i in range(1,n):
@@ -108,6 +109,7 @@ def mergeSort(n,a):
     a = merge(left,right)
     return a
 
+
 #reading the array from std input 
 '''n = int(input())
 s = input().split()
@@ -120,10 +122,33 @@ a = [i for i in range(1,n+1)]
 #print(a)
 #shuffle a in place
 random.shuffle(a)
-print(a)
+#sorting Algorithms comparison
+b = list(a)
+c = list(a)
+d = list(a)
+#print(a)
+t1 = time.time()
 a = mergeSort(n,a)
-print(a)
-
+t2 = time.time()
+#print(a)
+print("timeof merge sort: " +  str(t2-t1))
+#print(b)
+t1 = time.time()
+b = bubbleSort(n,b)
+t2 = time.time()
+#print(b)
+print("timeof bubble sort: " +  str(t2-t1))
+t1 = time.time()
+c = selectionSort(n,c)
+t2 = time.time()
+#print(b)
+print("timeof selection sort: " +  str(t2-t1))
+t1 = time.time()
+d = insertionSort(n,d)
+t2 = time.time()
+#print(b)
+print("timeof insertion sort: " +  str(t2-t1))
+'''
 #sortingFrames = bubbleSortingFrames(n,a)
 #sortingFrames = selectionSortFrames(n,a)
 sortingFrames = insertionSortFrames(n,a)
@@ -151,6 +176,8 @@ def update(frame):
     #return plt.bar(xdata,frame,width = width,align = align)
 ani = FuncAnimation(fig, update, frames=sortingFrames, blit=True,interval = interval)
 plt.show()
+'''
+
 
 '''
 plt.figure("array")
