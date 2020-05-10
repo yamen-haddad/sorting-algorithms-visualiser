@@ -64,6 +64,7 @@ def insertionSort(n,a):
 
 def insertionSortFrames(n,a):
     sortingFrames = list()
+    sortingFrames.append(a)
     for i in range(1,n):
         for j in range(i,0,-1):
             if a[j]<a[j-1]:
@@ -74,6 +75,38 @@ def insertionSortFrames(n,a):
             else:
                 break
     return sortingFrames
+
+def merge(left,right):
+    p1 = 0
+    p2 = 0
+    res = list()
+    while p1<len(left) and p2 < len(right):
+        if left[p1]<right[p2]:
+            res.append(left[p1])
+            p1 = p1+1
+        else :
+            res.append(right[p2])
+            p2 = p2+1
+    if p1 == len(left):
+        while p2<len(right):
+            res.append(right[p2])
+            p2 = p2+1
+    else :
+        while p1<len(left):
+            res.append(left[p1])
+            p1 = p1+1
+    return res
+
+def mergeSort(n,a):
+    if n==1:
+        return a
+    beg = 0
+    end = n-1
+    mid = (beg+end)//2
+    left = mergeSort(mid+1,a[beg:mid+1])
+    right = mergeSort(end - mid,a[mid+1:end+1])
+    a = merge(left,right)
+    return a
 
 #reading the array from std input 
 '''n = int(input())
@@ -88,12 +121,13 @@ a = [i for i in range(1,n+1)]
 #shuffle a in place
 random.shuffle(a)
 print(a)
-#a = insertionSort(n,a)
-#print(a)
+a = mergeSort(n,a)
+print(a)
 
 #sortingFrames = bubbleSortingFrames(n,a)
 #sortingFrames = selectionSortFrames(n,a)
 sortingFrames = insertionSortFrames(n,a)
+
 # Add Animation for bubble sort
 fig, ax = plt.subplots()
 ydata = sortingFrames[0]
