@@ -1,26 +1,3 @@
-'''import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-
-fig, ax = plt.subplots()
-xdata, ydata = [], []
-ln, = plt.plot([], [], 'ro')
-
-def init():
-    ax.set_xlim(0, 2*np.pi)
-    ax.set_ylim(-1, 1)
-    return ln,
-
-def update(frame):
-    xdata.append(frame)
-    ydata.append(np.sin(frame))
-    ln.set_data(xdata, ydata)
-    return ln,
-
-ani = FuncAnimation(fig, update, frames=np.linspace(0, 2*np.pi, 128),
-                    init_func=init, blit=True)
-plt.show()
-'''
 import numpy as np
 import matplotlib.pyplot as plt
 import random
@@ -34,6 +11,35 @@ def bubbleSort(n,a):
                 a[j] = a[j+1]
                 a[j+1] = tmp
     return a
+
+def selectionSort(n,a):
+    for i in range(n):
+        mind = 0
+        mmax = a[0]
+        for j in range(1,n-i):
+            if a[j]>mmax:
+                mmax = a[j]
+                mind = j
+        tmp = a[n-1-i]
+        a[n-1-i] = a[mind]
+        a[mind] = tmp
+    return a
+
+def selectionSortFrames(n,a):
+    sortingFrames = list()
+    for i in range(n):
+        mind = 0
+        mmax = a[0]
+        for j in range(1,n-i):
+            if a[j]>mmax:
+                mmax = a[j]
+                mind = j
+        tmp = a[n-1-i]
+        a[n-1-i] = a[mind]
+        a[mind] = tmp
+        sortingFrames.append(list(a))
+    return sortingFrames
+
 def bubbleSortingFrames(n,a):
     sortingFrames = list()
     for i in range(1,n):
@@ -42,7 +48,7 @@ def bubbleSortingFrames(n,a):
                 tmp = a[j]
                 a[j] = a[j+1]
                 a[j+1] = tmp
-                sortingFrames.append(list(a))
+            sortingFrames.append(list(a))
     return sortingFrames
 #reading the array from std input 
 '''n = int(input())
@@ -57,8 +63,11 @@ a = [i for i in range(1,n+1)]
 #shuffle a in place
 random.shuffle(a)
 #print(a)
-sortingFrames = bubbleSortingFrames(n,a)
+#a = selectionSort(n,a)
+#print(a)
 
+#sortingFrames = bubbleSortingFrames(n,a)
+sortingFrames = selectionSortFrames(n,a)
 # Add Animation for bubble sort
 fig, ax = plt.subplots()
 ydata = sortingFrames[0]
