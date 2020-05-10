@@ -12,6 +12,17 @@ def bubbleSort(n,a):
                 a[j+1] = tmp
     return a
 
+def bubbleSortingFrames(n,a):
+    sortingFrames = list()
+    for i in range(1,n):
+        for j in range(n-i):
+            if a[j]>a[j+1]:
+                tmp = a[j]
+                a[j] = a[j+1]
+                a[j+1] = tmp
+            sortingFrames.append(list(a))
+    return sortingFrames
+
 def selectionSort(n,a):
     for i in range(n):
         mind = 0
@@ -40,16 +51,30 @@ def selectionSortFrames(n,a):
         sortingFrames.append(list(a))
     return sortingFrames
 
-def bubbleSortingFrames(n,a):
+def insertionSort(n,a):
+    for i in range(1,n):
+        for j in range(i,0,-1):
+            if a[j]<a[j-1]:
+                tmp = a[j]
+                a[j]=a[j-1]
+                a[j-1] = tmp
+            else:
+                break
+    return a
+
+def insertionSortFrames(n,a):
     sortingFrames = list()
     for i in range(1,n):
-        for j in range(n-i):
-            if a[j]>a[j+1]:
+        for j in range(i,0,-1):
+            if a[j]<a[j-1]:
                 tmp = a[j]
-                a[j] = a[j+1]
-                a[j+1] = tmp
-            sortingFrames.append(list(a))
+                a[j]=a[j-1]
+                a[j-1] = tmp
+                sortingFrames.append(list(a))
+            else:
+                break
     return sortingFrames
+
 #reading the array from std input 
 '''n = int(input())
 s = input().split()
@@ -62,12 +87,13 @@ a = [i for i in range(1,n+1)]
 #print(a)
 #shuffle a in place
 random.shuffle(a)
-#print(a)
-#a = selectionSort(n,a)
+print(a)
+#a = insertionSort(n,a)
 #print(a)
 
 #sortingFrames = bubbleSortingFrames(n,a)
-sortingFrames = selectionSortFrames(n,a)
+#sortingFrames = selectionSortFrames(n,a)
+sortingFrames = insertionSortFrames(n,a)
 # Add Animation for bubble sort
 fig, ax = plt.subplots()
 ydata = sortingFrames[0]
